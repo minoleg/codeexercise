@@ -1,0 +1,35 @@
+This is my (Oleg Minukhin's) solution for Farmer's Fridge Code Exercise.
+
+The applications implemented all the features
+described in the requirement document, including both of the bonuses.  The
+algorithm I came up with to determine when the resulting word is an actual
+word and not a word that happens to end with the suffix letters is to have
+a minimum number of letters in a stem (currently 2).
+
+The solution uses JDK 17 and Spring Boot.  It also uses H2 database to store
+last 10 results.  The database, stop word file and grammar rules file are
+located in data directory.  All configuration are in application.properties
+file.
+
+To build the application you need to: 
+- go to the solution directory
+- set JAVA_HOME to point to JDK 17 location
+- run the following command:
+./mvnw install
+This will build the application and run the functional tests.
+
+To run the server you need to
+- go to the solution directory
+- set JAVA_HOME to point to JDK 17 location
+- run the following command:
+./mvnw install
+This will start a server at http://localhost:8080.  It supports two requests:
+1. POST http://localhost:8080/analyze
+    1) the payload is the text to analyze
+    2) exclude-stop-words=[true | false] to exclude stop words or not (default
+is true)
+    3) use-stems=[true | false] to use stems or original words (default is
+false)
+2. GET http://localhost:8080/analysis
+    1) prev-result=[1..10] is a required parameter to see first (1), second(2) and so on
+previous result set.
